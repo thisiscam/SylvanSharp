@@ -145,6 +145,18 @@ sylvan_sharp_var(BDD bdd)
 }
 
 void
+sylvan_sharp_addref(BDD bdd)
+{
+    sylvan_ref(bdd);
+}
+
+void 
+sylvan_sharp_delref(BDD bdd)
+{
+    sylvan_deref(bdd);
+}
+
+void
 sylvan_sharp_protect(BDD *bdd)
 {
     sylvan_protect(bdd);
@@ -181,6 +193,7 @@ void
 sylvan_sharp_init_package(size_t table_size, size_t max_tablesize, size_t cachesize, size_t max_cachesize)
 {
     sylvan_init_package(table_size, max_tablesize, cachesize, max_cachesize);
+    sylvan_init_bdd();
 }
 
 void

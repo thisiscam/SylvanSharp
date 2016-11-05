@@ -1,21 +1,23 @@
 ﻿using System;
+using BDD = System.Int64;
+
 namespace SylvanSharp
 {
 	public class bdd
 	{
-		private Int64 id;
+		private BDD id;
 		
-		public bdd(Int64 id)
+		public bdd(BDD id)
 		{
 			this.id = id;
-			SylvanSharpPInvoke.protect(ref this.id);
+			SylvanSharpPInvoke.addref(this.id);
 		}
 		
 		~bdd() {
-			SylvanSharpPInvoke.unprotect(ref this.id);
+			SylvanSharpPInvoke.delref(this.id);
 		}
 		
-		public Int64 Id { get { return id; } }
+		public BDD Id { get { return id; } }
 		
 		public bdd And(bdd other) {
 			return new bdd(SylvanSharpPInvoke.and(this.id, other.id));

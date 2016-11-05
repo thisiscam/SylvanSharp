@@ -17,7 +17,7 @@ namespace TestSylvanSharp
 			SylvanSharpPInvoke.print_dot(a_and_not_b.Id);
 
 			Assert(!a_and_b.EqualEqual(t));
-			Assert(a_and_b.Or(a_and_not_b).EqualEqual(t));
+			Assert(a_and_b.And(a_and_not_b).EqualEqual(f));
 		}
 		
 		private static void Assert(bool b)

@@ -73,6 +73,12 @@ namespace SylvanSharp
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_var")]
 		public static extern BDDVAR var(BDD bdd);
 		
+		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_addref")]
+		public static extern void addref(BDD bdd);
+		
+		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_delref")]
+		public static extern void delref(BDD bdd);
+		
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_protect")]
 		public static extern void protect(ref BDD bdd);
 		
