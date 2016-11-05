@@ -1,0 +1,23 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SylvanSharp", "SylvanSharp\SylvanSharp.csproj", "{54BBB20D-0B5B-4CC5-A797-E1AB4CA59108}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSylvanSharp", "TestSylvanSharp\TestSylvanSharp.csproj", "{A0B54469-66B9-4520-8CAE-B64B35B5EF60}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{54BBB20D-0B5B-4CC5-A797-E1AB4CA59108}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54BBB20D-0B5B-4CC5-A797-E1AB4CA59108}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54BBB20D-0B5B-4CC5-A797-E1AB4CA59108}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54BBB20D-0B5B-4CC5-A797-E1AB4CA59108}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0B54469-66B9-4520-8CAE-B64B35B5EF60}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0B54469-66B9-4520-8CAE-B64B35B5EF60}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0B54469-66B9-4520-8CAE-B64B35B5EF60}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0B54469-66B9-4520-8CAE-B64B35B5EF60}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

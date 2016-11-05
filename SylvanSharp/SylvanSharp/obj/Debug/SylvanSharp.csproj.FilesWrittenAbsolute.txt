@@ -1,0 +1,6 @@
+/Users/jianqiaoyang/Desktop/sylvan-sharp/SylvanSharp/SylvanSharp/obj/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/Users/jianqiaoyang/Desktop/sylvan-sharp/SylvanSharp/SylvanSharp/bin/Debug/libsylvan_native.so
+/Users/jianqiaoyang/Desktop/sylvan-sharp/SylvanSharp/SylvanSharp/bin/Debug/SylvanSharp.dll.mdb
+/Users/jianqiaoyang/Desktop/sylvan-sharp/SylvanSharp/SylvanSharp/bin/Debug/SylvanSharp.dll
+/Users/jianqiaoyang/Desktop/sylvan-sharp/SylvanSharp/SylvanSharp/obj/Debug/SylvanSharp.dll
+/Users/jianqiaoyang/Desktop/sylvan-sharp/SylvanSharp/SylvanSharp/obj/Debug/SylvanSharp.dll.mdb
