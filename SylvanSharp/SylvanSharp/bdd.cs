@@ -6,8 +6,8 @@ namespace SylvanSharp
 {
 	public class bdd
 	{
-		public static readonly bdd bddtrue = new bdd(SylvanSharp.make_true());
-		public static readonly bdd bddfalse = new bdd(SylvanSharp.make_false());
+		public static readonly bdd bddtrue = new bdd(SylvanSharp.make_true(), false);
+		public static readonly bdd bddfalse = new bdd(SylvanSharp.make_false(), false);
 		
 		private BDD _id;
 		
@@ -25,7 +25,8 @@ namespace SylvanSharp
 		
 		~bdd()
 		{
-			SylvanSharp.delref(this._id);
+			/* Use extension "del_if_running", since Finalizer might trigger after lace is shut down! */
+			SylvanSharp.delref_if_running(this._id);
 		}
 				
 		public bdd And(bdd r)

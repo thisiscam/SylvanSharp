@@ -202,22 +202,23 @@ sylvan_sharp_nodecount(BDD bdd)
     return sylvan_nodecount(bdd); // note: unsigned/signed mismatch...
 }
 
-void 
-sylvan_sharp_init_lace(int threads, size_t stacksize) {
-	lace_init(threads, stacksize);
-	lace_startup(0, NULL, NULL);
-}
-
-void
-sylvan_sharp_exit_lace() {
-    lace_exit();
-}
-
 void
 sylvan_sharp_init_package(size_t table_size, size_t max_tablesize, size_t cachesize, size_t max_cachesize)
 {
     sylvan_init_package(table_size, max_tablesize, cachesize, max_cachesize);
     sylvan_init_bdd();
+}
+
+bool
+sylvan_sharp_package_is_running()
+{
+    sylvan_is_running();
+}
+
+void
+sylvan_sharp_quit()
+{
+    sylvan_quit();
 }
 
 void
@@ -326,4 +327,12 @@ BDD sylvan_sharp_var_bdd_addref(BDD bdd) { return sylvan_ref(sylvan_sharp_var_bd
 BDD sylvan_sharp_high_addref(BDD bdd) { return sylvan_ref(sylvan_sharp_high(bdd)); }
 
 BDD sylvan_sharp_low_addref(BDD bdd) { return sylvan_ref(sylvan_sharp_low(bdd)); }
+
+void 
+sylvan_sharp_delref_if_running(BDD bdd)
+{
+    if(sylvan_package_is_running()) {
+        sylvan_deref(bdd);
+    }
+}
 /* end addref extensions */

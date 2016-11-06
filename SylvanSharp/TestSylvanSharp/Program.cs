@@ -24,7 +24,8 @@ namespace TestSylvanSharp
 	
 		public static void TestSingleThread()
 		{
-			SylvanSharp.SylvanSharp.init(4, 100000, 22, 22, 22, 22, 6);
+			SylvanSharp.Lace.Init(4, 100000);
+			SylvanSharp.SylvanSharp.init(22, 22, 22, 22, 6);
 			var t = bdd.bddtrue;
 			var f = bdd.bddfalse;
 			var a = bdd.ithvar(0);
@@ -38,14 +39,11 @@ namespace TestSylvanSharp
 			
 			//bdd zero_to_hundred = PeformTreeAnd(0, 3);
 			//SylvanSharpPInvoke.print_dot(zero_to_hundred.Id);
-			var array = new bdd[100];
+			var array = new bdd[10];
 			Lace.ParallelFor((i) => { array[i] = bdd.ithvar(i); }, array.Length);
 			Lace.ParallelFor((i) => Console.WriteLine("x {0}", array[i].Var()), array.Length);
-			AppDomain.CurrentDomain.ProcessExit += (sender, e) => {
-				GC.Collect();
-				GC.WaitForPendingFinalizers();
-				SylvanSharp.SylvanSharp.exit_lace();
-			};
+			SylvanSharp.SylvanSharp.quit();
+			Lace.Exit();
 		}
 		
 		private static void Assert(bool b)

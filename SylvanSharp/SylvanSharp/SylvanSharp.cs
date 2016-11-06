@@ -95,15 +95,15 @@ namespace SylvanSharp
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_nodecount")]
 		public static extern size_t nodecount(BDD bdd);
 		
-		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_init_lace")]
-		public static extern void init_lace(int threads, size_t stacksize);
-
-		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_exit_lace")]
-		public static extern void exit_lace();
-		
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_init_package")]
 		public static extern void init_package(size_t tablesize, size_t max_tablesize, size_t cachesize, size_t max_cachesize);
 		
+		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_package_is_running")]
+		public static extern bool package_is_running();
+
+		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_quit")]
+		public static extern void quit();
+
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_print")]
 		public static extern void print(BDD bdd);
 		
