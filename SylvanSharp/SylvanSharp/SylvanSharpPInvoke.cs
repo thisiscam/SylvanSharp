@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-using BDDVAR = System.UInt32;
+using BDDVAR = System.Int32;
 using BDD = System.Int64;
 using size_t=System.UInt64;
 
 namespace SylvanSharp
 {
-	public static class SylvanSharpPInvoke
+	public static partial class SylvanSharp
 	{
 		const string DLLNAME = "sylvan_native";
 		
@@ -26,6 +26,9 @@ namespace SylvanSharp
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_ithvar")]
 		public static extern BDD ithvar(BDDVAR var);
 		
+		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_nithvar")]
+		public static extern BDD nithvar(BDDVAR var);
+		
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_not")]
 		public static extern BDD not(BDD bdd);
 		
@@ -41,12 +44,6 @@ namespace SylvanSharp
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_ite")]
 		public static extern BDD ite(BDD a, BDD b, BDD c);
 		
-		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_equals")]
-		public static extern BDD equals(BDD a, BDD b);
-		
-		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_not_equals")]
-		public static extern BDD not_equals(BDD a, BDD b);
-		
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_exists")]
 		public static extern BDD exists(BDD a, BDD b);
 		
@@ -56,8 +53,14 @@ namespace SylvanSharp
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_restrict")]
 		public static extern BDD restrict(BDD a, BDD b);
 		
-		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_implies")]
-		public static extern BDD implies(BDD a, BDD b);
+		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_imp")]
+		public static extern BDD imp(BDD a, BDD b);
+		
+		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_invimp")]
+		public static extern BDD invimp(BDD a, BDD b);
+		
+		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_biimp")]
+		public static extern BDD biimp(BDD a, BDD b);
 		
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_support")]
 		public static extern BDD support(BDD bdd);
@@ -118,16 +121,15 @@ namespace SylvanSharp
 		
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_enable_gc")]
 		public static extern void enable_gc();
-
-		public delegate void lace_spawn_function(int i);
-
-		// [global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_spawn")]
-		// public static extern void lace_spawn(lace_spawn_function f);
-
-		// [global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_sync")]
-		// public static extern void lace_sync();
-
-		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_parallel_for_0")]
-		public static extern void lace_parallel_for(lace_spawn_function f, int iter);
+		
+		public delegate void gc_hook_cb();
+		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_gc_hook_pregc")]
+		public static extern void sylvan_gc_hook_pregc(gc_hook_cb cb);
+		
+		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_hook_postgc")]
+		public static extern void sylvan_gc_hook_postgc(gc_hook_cb cb);
+		
+		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_csharp_gc_hook_main")]
+		public static extern void sylvan_gc_hook_main(gc_hook_cb cb);
 	}
 }

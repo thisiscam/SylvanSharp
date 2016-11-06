@@ -6,32 +6,32 @@ namespace TestSylvanSharp
 {
 	class MainClass
 	{
-		private static bdd PeformTreeAnd(uint start, uint end)
+		private static bdd PeformTreeAnd(int start, int end)
 		{
 			Console.WriteLine("start {0} end {1}", start, end);
 			if(start == end) {
-				return Sylvan.bddtrue;
+				return bdd.bddtrue;
 			} else if(start == end - 1) {
-				return Sylvan.ithvar(start);
+				return bdd.ithvar(start);
 			} else {
 				var mid = (end - start) / 2 + start;
 				bdd r1 = null, r2 = null;
-				SylvanSharpPInvoke.print_dot(r1.Id);
-				SylvanSharpPInvoke.print_dot(r2.Id);
+				r1.PrintDot();
+				r2.PrintDot();
 				return r1.And(r2);
 			}
 		} 
 	
 		public static void TestSingleThread()
 		{
-			Sylvan.init(4, 100000, 22, 22, 22, 22, 6);
-			var t = Sylvan.bddtrue;
-			var f = Sylvan.bddfalse;
-			var a = Sylvan.ithvar(0);
-			var b = Sylvan.ithvar(1);
+			SylvanSharp.SylvanSharp.init(4, 100000, 22, 22, 22, 22, 6);
+			var t = bdd.bddtrue;
+			var f = bdd.bddfalse;
+			var a = bdd.ithvar(0);
+			var b = bdd.ithvar(1);
 			var a_and_b = a.And(b);
 			var a_and_not_b = a.And(b.Not());
-			SylvanSharpPInvoke.print_dot(a_and_not_b.Id);
+			a_and_not_b.PrintDot();
 
 			Assert(!a_and_b.EqualEqual(t));
 			Assert(a_and_b.And(a_and_not_b).EqualEqual(f));
@@ -39,9 +39,9 @@ namespace TestSylvanSharp
 			//bdd zero_to_hundred = PeformTreeAnd(0, 3);
 			//SylvanSharpPInvoke.print_dot(zero_to_hundred.Id);
 			var array = new bdd[100];
-			SylvanSharpPInvoke.lace_parallel_for((i) => { array[i] = Sylvan.ithvar((uint)i); }, array.Length);
-			SylvanSharpPInvoke.lace_parallel_for((i) => Console.WriteLine("x {0}", array[i].var()), array.Length);
-			SylvanSharpPInvoke.exit_lace();
+			Lace.ParallelFor((i) => { array[i] = bdd.ithvar(i); }, array.Length);
+			Lace.ParallelFor((i) => Console.WriteLine("x {0}", array[i].Var()), array.Length);
+			SylvanSharp.SylvanSharp.exit_lace();
 		}
 		
 		private static void Assert(bool b)
