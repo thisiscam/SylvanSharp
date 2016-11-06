@@ -18,27 +18,28 @@ namespace SylvanSharp
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_sharp_steal_loop")]
 		static extern void lace_worker_steal_loop();
 		
-		static void LaceThreadEntry(int worker, size_t dqsize)
+		static void LaceThreadEntry(object _args)
 		{
-			lace_sharp_init_worker(worker, dqsize);
+			var args = _args as Tuple<int, size_t>;
+			lace_init_worker(args.Item1, args.Item2);
 			lace_worker_steal_loop();
 		}
 		
 		private static List<Thread> _threads = new List<Thread>();
 		public static void Init(int nthreads, size_t dqsize)
 		{
-			lace_sharp_init_worker(threads, dqsize);
-			// make calling thread a lace thread
-			_StartLaceThread(0, dqsize);
+			_Init(nthreads, dqsize);
 			// start workers
-			for (int i = 1; i < threads; i++)
+			for (int i = 1; i < nthreads; i++)
 	        {
-	            Thread thread = new Thread(() => LaceThreadEntry(i, dqsize));
+	            Thread thread = new Thread(new ParameterizedThreadStart(LaceThreadEntry));
 	            thread.IsBackground = true;
-	            thread.Name = string.Format("LaceWorkerThread{0}",i);
+	            thread.Name = string.Format("LaceWorker{0}",i);
 	            _threads.Add(thread);
-	            thread.Start();
+	            thread.Start(Tuple.Create(i, dqsize));
 	        }
+	        // make calling thread a lace thread
+			lace_init_worker(0, dqsize);
 		}
 
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_sharp_exit_lace")]

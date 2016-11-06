@@ -7,20 +7,18 @@ lace_sharp_init_lace(int threads, size_t dqsize) {
 
 void 
 lace_sharp_init_worker(int worker, size_t dqsize) {
-    lace_init_worker(threads, dqsize);
+    lace_init_worker(worker, dqsize);
 }
 
 void 
 lace_sharp_steal_loop() {
-	LACE_ME;
-    lace_steal_loop(&lace_quits);
+	lace_run_default_worker();
 }
 
 void
 lace_sharp_exit_lace() {
     lace_exit();
 }
-
 
 typedef void (*laced_function_0)(int);
 
