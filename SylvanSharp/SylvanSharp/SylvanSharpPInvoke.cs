@@ -120,8 +120,6 @@ namespace SylvanSharp
 		public static extern void enable_gc();
 
 		public delegate void lace_spawn_function(int i);
-		public delegate void lace_spawn_function<T>(int i, T arg0) where T : class;
-		public delegate void lace_spawn_function<T0, T1>(int i, T0 arg0, T1 arg1) where T0: class where T1: class;
 
 		// [global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_spawn")]
 		// public static extern void lace_spawn(lace_spawn_function f);
@@ -130,16 +128,6 @@ namespace SylvanSharp
 		// public static extern void lace_sync();
 
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_parallel_for_0")]
-		private static extern void lace_parallel_for(lace_spawn_function f, int iter);
-
-		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_parallel_for_1")]
-		private unsafe static extern void lace_parallel_for(Delegate f, int iter, IntPtr data);
-
-		public unsafe static void lace_parallel_for<T>(lace_spawn_function<T> f, T[] data) where T : class
-		{
-			var handle = GCHandle.Alloc(data, GCHandleType.Pinned);
-			lace_parallel_for(f, data.Length, handle.AddrOfPinnedObject());
-			handle.Free();
-		}
+		public static extern void lace_parallel_for(lace_spawn_function f, int iter);
 	}
 }
