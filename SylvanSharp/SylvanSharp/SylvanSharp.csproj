@@ -38,8 +38,8 @@
     <Compile Include="SylvanSharp.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\build\wrapper\libsylvan_native.dylib">
-      <Link>libsylvan_native.dylib</Link>
+    <None Include="..\..\build\wrapper\libsylvan_native.*">
+      <Link>libsylvan_native.so</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
