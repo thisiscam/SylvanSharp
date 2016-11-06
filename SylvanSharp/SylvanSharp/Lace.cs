@@ -1,6 +1,7 @@
 ﻿using System;
-
-using size_t=System.UInt64;
+using System.Collections.Generic;
+using System.Threading;
+using size_t = System.UInt64;
 
 namespace SylvanSharp
 {
@@ -8,9 +9,37 @@ namespace SylvanSharp
 	{
 		const string DLLNAME = "sylvan_native";
 		
-
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_sharp_init_lace")]
-		public static extern void Init(int threads, size_t stacksize);
+		static extern void _Init(int nthreads, size_t dqsize);
+		
+		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_sharp_init_worker")]
+		static extern void lace_init_worker(int worker, size_t dqsize);
+
+		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_sharp_steal_loop")]
+		static extern void lace_worker_steal_loop();
+		
+		static void LaceThreadEntry(int worker, size_t dqsize)
+		{
+			lace_sharp_init_worker(worker, dqsize);
+			lace_worker_steal_loop();
+		}
+		
+		private static List<Thread> _threads = new List<Thread>();
+		public static void Init(int nthreads, size_t dqsize)
+		{
+			lace_sharp_init_worker(threads, dqsize);
+			// make calling thread a lace thread
+			_StartLaceThread(0, dqsize);
+			// start workers
+			for (int i = 1; i < threads; i++)
+	        {
+	            Thread thread = new Thread(() => LaceThreadEntry(i, dqsize));
+	            thread.IsBackground = true;
+	            thread.Name = string.Format("LaceWorkerThread{0}",i);
+	            _threads.Add(thread);
+	            thread.Start();
+	        }
+		}
 
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_sharp_exit_lace")]
 		public static extern void Exit();

@@ -1,9 +1,19 @@
 #include "lace.h"
 
 void 
-lace_sharp_init_lace(int threads, size_t stacksize) {
-    lace_init(threads, stacksize);
-    lace_startup(0, NULL, NULL);
+lace_sharp_init_lace(int threads, size_t dqsize) {
+    lace_init(threads, dqsize);
+}
+
+void 
+lace_sharp_init_worker(int worker, size_t dqsize) {
+    lace_init_worker(threads, dqsize);
+}
+
+void 
+lace_sharp_steal_loop() {
+	LACE_ME;
+    lace_steal_loop(&lace_quits);
 }
 
 void
