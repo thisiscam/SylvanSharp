@@ -1,3 +1,4 @@
 [submodule "native"]
 	path = native
-	url = https://github.com/utwente-fmt/sylvan.git
+	url = https://github.com/thisiscam/sylvan.git
+
