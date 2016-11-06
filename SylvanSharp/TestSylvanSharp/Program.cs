@@ -38,9 +38,9 @@ namespace TestSylvanSharp
 			
 			//bdd zero_to_hundred = PeformTreeAnd(0, 3);
 			//SylvanSharpPInvoke.print_dot(zero_to_hundred.Id);
-			var array = new int[100];
+			var array = new object[100];
 			SylvanSharpPInvoke.lace_parallel_for(() => Console.WriteLine("x"), 10);
-			SylvanSharpPInvoke.lace_parallel_for<int>((i) => Console.WriteLine(array[i]), array);
+			SylvanSharpPInvoke.lace_parallel_for<object>((i) => Console.WriteLine(array[i]), array);
 			SylvanSharpPInvoke.exit_lace();
 		}
 		

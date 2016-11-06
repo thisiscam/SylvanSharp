@@ -120,8 +120,8 @@ namespace SylvanSharp
 		public static extern void enable_gc();
 
 		public delegate void lace_spawn_function();
-		public delegate void lace_spawn_function<T>(T arg0);
-		public delegate void lace_spawn_function<T0, T1>(T0 arg0, T1 arg1);
+		public delegate void lace_spawn_function<T>(T arg0) where T : class;
+		public delegate void lace_spawn_function<T0, T1>(T0 arg0, T1 arg1) where T0: class where T1: class;
 
 		// [global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_spawn")]
 		// public static extern void lace_spawn(lace_spawn_function f);
@@ -133,11 +133,13 @@ namespace SylvanSharp
 		public static extern void lace_parallel_for(lace_spawn_function f, int iter);
 
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_parallel_for_1")]
-		private unsafe static extern void lace_parallel_for(IntPtr f, int iter, IntPtr data);
+		private unsafe static extern void lace_parallel_for(Delegate f, int iter, IntPtr data);
 
-		public unsafe static void lace_parallel_for<T>(lace_spawn_function<T> f, T[] data)
+		public unsafe static void lace_parallel_for<T>(lace_spawn_function<T> f, T[] data) where T : class
 		{
-			lace_parallel_for((IntPtr)GCHandle.Alloc(f), data.Length, (IntPtr)GCHandle.Alloc(data));
+			var handle = GCHandle.Alloc(data, GCHandleType.Pinned);
+			lace_parallel_for(f, data.Length, handle.AddrOfPinnedObject());
+			handle.Free();
 		}
 	}
 }
