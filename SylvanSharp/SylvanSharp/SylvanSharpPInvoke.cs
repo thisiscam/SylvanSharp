@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 
 using BDDVAR = System.UInt32;
 using BDD = System.Int64;
@@ -93,6 +94,9 @@ namespace SylvanSharp
 		
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_init_lace")]
 		public static extern void init_lace(int threads, size_t stacksize);
+
+		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_exit_lace")]
+		public static extern void exit_lace();
 		
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_init_package")]
 		public static extern void init_package(size_t tablesize, size_t max_tablesize, size_t cachesize, size_t max_cachesize);
@@ -114,5 +118,26 @@ namespace SylvanSharp
 		
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_enable_gc")]
 		public static extern void enable_gc();
+
+		public delegate void lace_spawn_function0();
+		public delegate void lace_spawn_function<T>(T arg0);
+		public delegate void lace_spawn_function2<T0, T1>(T0 arg0, T1 arg1);
+
+		// [global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_spawn")]
+		// public static extern void lace_spawn(lace_spawn_function f);
+
+		// [global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_sync")]
+		// public static extern void lace_sync();
+
+		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_parallel_for_0")]
+		public static extern void lace_parallel_for(Intptr f, int iter);
+
+		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_parallel_for_1")]
+		private static extern void lace_parallel_for(Intptr f, int iter, Intptr data);
+
+		public static void lace_parallel_for<T>(lace_spawn_function<T> f, T[] data)
+		{
+			lace_parallel_for(f, data.Length, data);
+		}
 	}
 }

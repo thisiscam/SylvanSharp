@@ -186,7 +186,11 @@ void
 sylvan_sharp_init_lace(int threads, size_t stacksize) {
 	lace_init(threads, stacksize);
 	lace_startup(0, NULL, NULL);
-    LACE_ME;
+}
+
+void
+sylvan_sharp_exit_lace() {
+    lace_exit();
 }
 
 void

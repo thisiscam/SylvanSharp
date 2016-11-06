@@ -16,10 +16,6 @@ namespace TestSylvanSharp
 			} else {
 				var mid = (end - start) / 2 + start;
 				bdd r1 = null, r2 = null;
-				Parallel.Invoke(
-					() => r1 = PeformTreeAnd(start, mid),
-					() => r2 = PeformTreeAnd(mid, end)
-				);
 				SylvanSharpPInvoke.print_dot(r1.Id);
 				SylvanSharpPInvoke.print_dot(r2.Id);
 				return r1.And(r2);
@@ -28,7 +24,7 @@ namespace TestSylvanSharp
 	
 		public static void TestSingleThread()
 		{
-			Sylvan.init(4, 100000, 22, 26, 22, 26, 6);
+			Sylvan.init(4, 100000, 22, 22, 22, 22, 6);
 			var t = Sylvan.bddtrue;
 			var f = Sylvan.bddfalse;
 			var a = Sylvan.ithvar(0);
@@ -42,9 +38,8 @@ namespace TestSylvanSharp
 			
 			//bdd zero_to_hundred = PeformTreeAnd(0, 3);
 			//SylvanSharpPInvoke.print_dot(zero_to_hundred.Id);
-			Parallel.For(0, 10000,
-				(i) => Sylvan.ithvar((uint)i).And(b)
-			);
+			SylvanSharpPInvoke.lace_parallel_for(() => Console.WriteLine("x"), 10);
+			SylvanSharpPInvoke.exit_lace();
 		}
 		
 		private static void Assert(bool b)
