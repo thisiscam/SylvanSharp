@@ -41,7 +41,11 @@ namespace TestSylvanSharp
 			var array = new bdd[100];
 			Lace.ParallelFor((i) => { array[i] = bdd.ithvar(i); }, array.Length);
 			Lace.ParallelFor((i) => Console.WriteLine("x {0}", array[i].Var()), array.Length);
-			SylvanSharp.SylvanSharp.exit_lace();
+			AppDomain.CurrentDomain.ProcessExit += (sender, e) => {
+				GC.Collect();
+				GC.WaitForPendingFinalizers();
+				SylvanSharp.SylvanSharp.exit_lace();
+			};
 		}
 		
 		private static void Assert(bool b)

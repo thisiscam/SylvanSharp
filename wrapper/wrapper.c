@@ -60,7 +60,7 @@ BDD
 sylvan_sharp_xor(BDD a, BDD b)
 {
     LACE_ME;
-    return sylvan_or(a, b);
+    return sylvan_xor(a, b);
 }
 
 BDD
@@ -126,7 +126,7 @@ sylvan_sharp_restrict(BDD a, BDD b)
 }
 
 BDD
-sylvan_sharp_implies(BDD a, BDD b)
+sylvan_sharp_imp(BDD a, BDD b)
 {
     LACE_ME;
     return sylvan_imp(a, b);
@@ -295,35 +295,35 @@ sylvan_csharp_gc_hook_main(gc_hook_cb callback)
 /* addref extensions */
 BDD sylvan_sharp_not_addref(BDD bdd) { return sylvan_ref(sylvan_not(bdd)); }
 
-BDD sylvan_sharp_and_addref(BDD a, BDD b) { LACE_ME; return sylvan_ref(sylvan_and(a, b)); }
+BDD sylvan_sharp_and_addref(BDD a, BDD b) { return sylvan_ref(sylvan_sharp_and(a, b)); }
 
-BDD sylvan_sharp_or_addref(BDD a, BDD b) { LACE_ME; return sylvan_ref(sylvan_or(a, b)); }
+BDD sylvan_sharp_or_addref(BDD a, BDD b) { return sylvan_ref(sylvan_sharp_or(a, b)); }
 
-BDD sylvan_sharp_xor_addref(BDD a, BDD b) { LACE_ME; return sylvan_ref(sylvan_or(a, b)); }
+BDD sylvan_sharp_xor_addref(BDD a, BDD b) { return sylvan_ref(sylvan_sharp_xor(a, b)); }
 
-BDD sylvan_sharp_ite_addref(BDD a, BDD b, BDD c) { LACE_ME; return sylvan_ref(sylvan_ite(a, b, c)); }
+BDD sylvan_sharp_ite_addref(BDD a, BDD b, BDD c) { return sylvan_ref(sylvan_sharp_ite(a, b, c)); }
 
-BDD sylvan_sharp_diff_addref(BDD a, BDD b) { LACE_ME; return sylvan_ref(sylvan_diff(a, b)); }
+BDD sylvan_sharp_diff_addref(BDD a, BDD b) { return sylvan_ref(sylvan_sharp_diff(a, b)); }
 
-BDD sylvan_sharp_less_addref(BDD a, BDD b) { LACE_ME; return sylvan_ref(sylvan_less(a, b)); }
+BDD sylvan_sharp_less_addref(BDD a, BDD b) { return sylvan_ref(sylvan_sharp_less(a, b)); }
 
-BDD sylvan_sharp_exists_addref(BDD a, BDD b) { LACE_ME; return sylvan_ref(sylvan_exists(a, b)); }
+BDD sylvan_sharp_exists_addref(BDD a, BDD b) { return sylvan_ref(sylvan_sharp_exists(a, b)); }
 
-BDD sylvan_sharp_constrain_addref(BDD a, BDD b) { LACE_ME; return sylvan_ref(sylvan_constrain(a, b)); }
+BDD sylvan_sharp_constrain_addref(BDD a, BDD b) { return sylvan_ref(sylvan_sharp_constrain(a, b)); }
 
-BDD sylvan_sharp_restrict_addref(BDD a, BDD b) { LACE_ME; return sylvan_ref(sylvan_restrict(a, b)); }
+BDD sylvan_sharp_restrict_addref(BDD a, BDD b) { return sylvan_ref(sylvan_sharp_restrict(a, b)); }
 
-BDD sylvan_sharp_imp_addref(BDD a, BDD b) { LACE_ME; return sylvan_ref(sylvan_imp(a, b)); }
+BDD sylvan_sharp_imp_addref(BDD a, BDD b) { return sylvan_ref(sylvan_sharp_imp(a, b)); }
 
-BDD sylvan_sharp_invimp_addref(BDD a, BDD b) { LACE_ME; return sylvan_ref(sylvan_invimp(a, b)); }
+BDD sylvan_sharp_invimp_addref(BDD a, BDD b) { return sylvan_ref(sylvan_sharp_invimp(a, b)); }
 
-BDD sylvan_sharp_biimp_addref(BDD a, BDD b) { LACE_ME; return sylvan_ref(sylvan_biimp(a, b)); }
+BDD sylvan_sharp_biimp_addref(BDD a, BDD b) { return sylvan_ref(sylvan_sharp_biimp(a, b)); }
 
-BDD sylvan_sharp_support_addref(BDD bdd) { LACE_ME; return sylvan_ref(sylvan_support(bdd)); }
+BDD sylvan_sharp_support_addref(BDD bdd) { return sylvan_ref(sylvan_sharp_support(bdd)); }
 
-BDD sylvan_sharp_var_bdd_addref(BDD bdd) { return sylvan_ref(sylvan_ithvar(sylvan_var(bdd))); }
+BDD sylvan_sharp_var_bdd_addref(BDD bdd) { return sylvan_ref(sylvan_sharp_var_bdd(bdd)); }
 
-BDD sylvan_sharp_high_addref(BDD bdd) { LACE_ME; return sylvan_ref(sylvan_high(bdd)); }
+BDD sylvan_sharp_high_addref(BDD bdd) { return sylvan_ref(sylvan_sharp_high(bdd)); }
 
-BDD sylvan_sharp_low_addref(BDD bdd) { return sylvan_ref(sylvan_low(bdd)); }
+BDD sylvan_sharp_low_addref(BDD bdd) { return sylvan_ref(sylvan_sharp_low(bdd)); }
 /* end addref extensions */
