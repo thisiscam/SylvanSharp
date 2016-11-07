@@ -21,6 +21,9 @@ namespace SylvanSharp
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_default_stacksize")]
 		static extern size_t lace_default_stacksize();
 		
+		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_workers")]
+		static extern size_t lace_workers();
+		
 		static void LaceThreadEntry(object _args)
 		{
 			var args = _args as Tuple<int, size_t>;
@@ -29,12 +32,16 @@ namespace SylvanSharp
 		}
 		
 		private static List<Thread> _threads = new List<Thread>();
-		public static void Init(int nthreads, size_t dqsize=0, int stacksize=0)
+		public static void Init(int nthreads=0, size_t dqsize=0, int stacksize=0)
 		{
 			_Init(nthreads, dqsize);
 			if(stacksize == 0) 
 			{ 
 				stacksize = (int)lace_default_stacksize();
+			}
+			if(nthreads == 0)
+			{
+				nthreads = (int)lace_workers();
 			}
 			// start workers
 			for (int i = 1; i < nthreads; i++)
