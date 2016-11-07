@@ -9,14 +9,17 @@ namespace SylvanSharp
 	{
 		const string DLLNAME = "sylvan_native";
 		
-		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_sharp_init_lace")]
+		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_init")]
 		static extern void _Init(int nthreads, size_t dqsize);
 		
-		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_sharp_init_worker")]
+		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_init_worker")]
 		static extern void lace_init_worker(int worker, size_t dqsize);
 
-		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_sharp_steal_loop")]
+		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_run_default_worker")]
 		static extern void lace_worker_steal_loop();
+		
+		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_default_stacksize")]
+		static extern size_t lace_default_stacksize();
 		
 		static void LaceThreadEntry(object _args)
 		{
@@ -26,13 +29,17 @@ namespace SylvanSharp
 		}
 		
 		private static List<Thread> _threads = new List<Thread>();
-		public static void Init(int nthreads, size_t dqsize)
+		public static void Init(int nthreads, size_t dqsize=0, int stacksize=0)
 		{
 			_Init(nthreads, dqsize);
+			if(stacksize == 0) 
+			{ 
+				stacksize = (int)lace_default_stacksize();
+			}
 			// start workers
 			for (int i = 1; i < nthreads; i++)
 	        {
-	            Thread thread = new Thread(new ParameterizedThreadStart(LaceThreadEntry));
+	            Thread thread = new Thread(new ParameterizedThreadStart(LaceThreadEntry), stacksize);
 	            thread.IsBackground = true;
 	            thread.Name = string.Format("LaceWorker{0}",i);
 	            _threads.Add(thread);
@@ -42,7 +49,7 @@ namespace SylvanSharp
 			lace_init_worker(0, dqsize);
 		}
 
-		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_sharp_exit_lace")]
+		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_exit")]
 		public static extern void Exit();
 
 		// [global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_spawn")]

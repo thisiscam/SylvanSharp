@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include "sylvan.h"
 
 void
@@ -212,7 +213,7 @@ sylvan_sharp_init_package(size_t table_size, size_t max_tablesize, size_t caches
 bool
 sylvan_sharp_package_is_running()
 {
-    sylvan_is_running();
+    return sylvan_package_is_running();
 }
 
 void

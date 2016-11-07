@@ -1,9 +1,9 @@
 ﻿<Properties StartupConfiguration="{A0B54469-66B9-4520-8CAE-B64B35B5EF60}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="SylvanSharp/Lace.cs">
+  <MonoDevelop.Ide.Workbench>
     <Files>
       <File FileName="SylvanSharp/bdd.cs" Line="18" Column="11" />
       <File FileName="TestSylvanSharp/Program.cs" Line="33" Column="25" />
-      <File FileName="SylvanSharp/Lace.cs" Line="29" Column="91" />
+      <File FileName="SylvanSharp/Lace.cs" Line="35" Column="38" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Release|x64" />
