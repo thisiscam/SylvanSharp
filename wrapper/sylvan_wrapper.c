@@ -222,6 +222,40 @@ sylvan_sharp_quit()
     sylvan_quit();
 }
 
+size_t sylvan_sharp_serialize_add(BDD bdd) {
+    return sylvan_serialize_add(bdd);
+}
+
+size_t sylvan_sharp_serialize_get(BDD bdd) {
+    return sylvan_serialize_get(bdd);
+}
+
+BDD sylvan_sharp_serialize_get_reversed(size_t value) {
+    return sylvan_serialize_get_reversed(value);
+}
+
+void sylvan_sharp_serialize_reset(void) {
+    sylvan_serialize_reset();
+}
+
+void sylvan_sharp_serialize_totext(const char *out) {
+    FILE* f = fopen(out, "w+");
+    sylvan_serialize_totext(f);
+    fclose(f);
+}
+
+void sylvan_sharp_serialize_tofile(const char *out) {
+    FILE* f = fopen(out, "w+");
+    sylvan_serialize_tofile(f);
+    fclose(f);
+}
+
+void sylvan_sharp_serialize_fromfile(const char *in) {
+    FILE* f = fopen(in, "r");
+    sylvan_serialize_fromfile(f);
+    fclose(f);
+}
+
 void
 sylvan_sharp_print(BDD bdd)
 {

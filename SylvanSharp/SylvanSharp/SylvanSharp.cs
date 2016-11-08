@@ -131,5 +131,26 @@ namespace SylvanSharp
 		
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_csharp_gc_hook_main")]
 		public static extern void sylvan_gc_hook_main(gc_hook_cb cb);
+		
+		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_serialize_add")]
+		public static extern size_t sylvan_serialize_add(BDD bdd);
+
+		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_serialize_get")]
+		public static extern size_t sylvan_serialize_get(BDD bdd);
+		
+		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_serialize_get_reversed")]
+		public static extern BDD sylvan_serialize_get_reversed(size_t value);
+		
+		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_serialize_reset")]
+		public static extern void sylvan_serialize_reset();
+		
+		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_serialize_totext")]
+		public static extern void sylvan_serialize_totext(string o);
+		
+		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_serialize_tofile")]
+		public static extern void sylvan_serialize_tofile(string o);
+		
+		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_serialize_fromfile")]
+		public static extern void sylvan_serialize_fromfile(string i);
 	}
 }

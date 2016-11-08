@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using SylvanSharp;
 
@@ -39,9 +40,17 @@ namespace TestSylvanSharp
 			
 			//bdd zero_to_hundred = PeformTreeAnd(0, 3);
 			//SylvanSharpPInvoke.print_dot(zero_to_hundred.Id);
-			var array = new bdd[10];
+			var array = new bdd[100];
 			Lace.ParallelFor((i) => { array[i] = bdd.ithvar(i).And(bdd.ithvar(i+1)); }, array.Length);
-			Lace.ParallelFor((i) => Console.WriteLine("x {0}", array[i]), array.Length);
+			int x = 0;
+			Lace.ParallelFor((i) => {
+				Console.WriteLine("{0} {0}", i, array[i]);
+				Lace.LockRegion(mutex, () => {
+					Console.WriteLine(i);
+					x += i;
+				});
+			}, array.Length);
+			Console.WriteLine("Acc x = {0}", x);
 			SylvanSharp.SylvanSharp.quit();
 			Lace.Exit();
 		}
@@ -52,6 +61,8 @@ namespace TestSylvanSharp
 				throw new Exception("failed");
 			}
 		}
+		
+		private static IntPtr mutex = Lace.CreateMutex();
 		
 		public static void Main(string[] args)
 		{
