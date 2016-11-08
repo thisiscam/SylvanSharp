@@ -26,13 +26,21 @@ namespace SylvanSharp
 		
 		static void LaceThreadEntry(object _args)
 		{
-			var args = _args as Tuple<int, size_t>;
+			var args = _args as Tuple<int, size_t, Action<Exception>>;
 			lace_init_worker(args.Item1, args.Item2);
-			lace_worker_steal_loop();
+			try {
+				lace_worker_steal_loop();
+			} catch(Exception ex) {
+				if(args.Item3!=null) {
+					args.Item3.Invoke(ex);
+				} else {
+					throw ex;
+				}
+			}
 		}
 		
 		private static List<Thread> _threads = new List<Thread>();
-		public static void Init(int nthreads=0, size_t dqsize=0, int stacksize=0)
+		public static void Init(int nthreads=0, size_t dqsize=0, int stacksize=0, Action<Exception> ex_handler=null)
 		{
 			_Init(nthreads, dqsize);
 			if(stacksize == 0) 
@@ -50,7 +58,7 @@ namespace SylvanSharp
 	            thread.IsBackground = true;
 	            thread.Name = string.Format("LaceWorker{0}",i);
 	            _threads.Add(thread);
-	            thread.Start(Tuple.Create(i, dqsize));
+	            thread.Start(Tuple.Create(i, dqsize, ex_handler));
 	        }
 	        // make calling thread a lace thread
 			lace_init_worker(0, dqsize);

@@ -34,7 +34,7 @@ sylvan_sharp_ithvar(BDDVAR var)
 BDD
 sylvan_sharp_nithvar(BDDVAR var)
 {
-    return sylvan_ithvar(var);
+    return sylvan_nithvar(var);
 }
 
 BDD
