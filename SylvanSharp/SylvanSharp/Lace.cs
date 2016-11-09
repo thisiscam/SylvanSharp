@@ -79,13 +79,16 @@ namespace SylvanSharp
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_sharp_parallel_for_0")]
 		public static extern void ParallelFor(lace_spawn_function f, int iter);
 		
-		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_sharp_create_mutex")]
-		public static extern IntPtr CreateMutex();
+		public static Int64 CreateMutex() {
+			return 1;
+		}
 		
-		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_sharp_free_mutex")]
-		public static extern void FreeMutex(IntPtr m);
+		public static void FreeMutex(ref Int64 m) {
+			m = -1;
+			return;
+		}
 		
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_sharp_lock_region")]
-		public static extern void LockRegion(IntPtr m, lace_protected_region region);
+		public static extern void LockRegion(ref Int64 m, lace_protected_region region);
 	}
 }

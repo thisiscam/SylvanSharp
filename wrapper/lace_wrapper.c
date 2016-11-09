@@ -1,13 +1,19 @@
 #include <stdlib.h>
-#include "lace.h"
+#include "sylvan.h"
 
 typedef void (*laced_function_0)(void);
 typedef void (*laced_function_1)(int);
 
 VOID_TASK_DECL_1(lace_spawn_f_wrapper0, laced_function_0);
-VOID_TASK_IMPL_1(lace_spawn_f_wrapper0, laced_function_0, f) { f(); }
+VOID_TASK_IMPL_1(lace_spawn_f_wrapper0, laced_function_0, f) { 
+    sylvan_gc_test();
+	f(); 
+}
 VOID_TASK_DECL_2(lace_spawn_f_wrapper1, laced_function_1, int);
-VOID_TASK_IMPL_2(lace_spawn_f_wrapper1, laced_function_1, f, int, i) { f(i); }
+VOID_TASK_IMPL_2(lace_spawn_f_wrapper1, laced_function_1, f, int, i) { 
+    sylvan_gc_test();
+	f(i); 
+}
 
 void lace_sharp_parallel_for_0(laced_function_1 f, int iter)
 {
@@ -38,10 +44,13 @@ void lace_sharp_free_mutex(lace_mutex* mutex) {
 }
 
 void lace_sharp_lock_region(lace_mutex* mutex, laced_function_0 f) {
+	// printf("%p %d\n", mutex, *mutex);
 	LACE_ME;
 	while(!cas(mutex, 1, 0)) {
-		lace_steal_loop((int*)mutex);
+		sylvan_gc_test();
+		lace_steal_random();
 	}
+	sylvan_gc_test();
 	f();
 	*mutex = 1;
 }
