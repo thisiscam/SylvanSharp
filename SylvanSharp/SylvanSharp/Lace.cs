@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security;
 using System.Threading;
 using size_t = System.UInt64;
 
@@ -9,18 +10,23 @@ namespace SylvanSharp
 	{
 		const string DLLNAME = "sylvan_native";
 		
+		[SuppressUnmanagedCodeSecurity]
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_init")]
 		static extern void _Init(int nthreads, size_t dqsize);
 		
+		[SuppressUnmanagedCodeSecurity]
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_init_worker")]
 		static extern void lace_init_worker(int worker, size_t dqsize);
 
+		[SuppressUnmanagedCodeSecurity]
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_run_default_worker")]
 		static extern void lace_worker_steal_loop();
 		
+		[SuppressUnmanagedCodeSecurity]
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_default_stacksize")]
 		static extern size_t lace_default_stacksize();
 		
+		[SuppressUnmanagedCodeSecurity]
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_workers")]
 		static extern size_t lace_workers();
 		
@@ -64,6 +70,7 @@ namespace SylvanSharp
 			lace_init_worker(0, dqsize);
 		}
 
+		[SuppressUnmanagedCodeSecurity]
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_exit")]
 		public static extern void Exit();
 
@@ -76,6 +83,7 @@ namespace SylvanSharp
 		public delegate void lace_protected_region();
 		public delegate void lace_spawn_function(int i);
 		
+		[SuppressUnmanagedCodeSecurity]
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_sharp_parallel_for_0")]
 		public static extern void ParallelFor(lace_spawn_function f, int iter);
 		
@@ -88,6 +96,7 @@ namespace SylvanSharp
 			return;
 		}
 		
+		[SuppressUnmanagedCodeSecurity]
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="lace_sharp_lock_region")]
 		public static extern void LockRegion(ref Int64 m, lace_protected_region region);
 	}

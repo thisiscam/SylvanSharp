@@ -2,6 +2,7 @@
 
 using BDDVAR = System.Int32;
 using BDD = System.Int64;
+using System.Security;
 
 namespace SylvanSharp
 {
@@ -21,57 +22,75 @@ namespace SylvanSharp
 			SylvanSharp.set_granularity(granularity);
 		}
 		
+		[SuppressUnmanagedCodeSecurity]
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME,EntryPoint="sylvan_sharp_not_addref")]
 		public static extern BDD sylvan_sharp_not_addref(BDD bdd);
 		
+		[SuppressUnmanagedCodeSecurity]
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME,EntryPoint="sylvan_sharp_and_addref")]
 		public static extern BDD sylvan_sharp_and_addref(BDD a, BDD b);
 		
+		[SuppressUnmanagedCodeSecurity]
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME,EntryPoint="sylvan_sharp_or_addref")]
 		public static extern BDD sylvan_sharp_or_addref(BDD a, BDD b);
 		
+		[SuppressUnmanagedCodeSecurity]
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME,EntryPoint="sylvan_sharp_xor_addref")]
 		public static extern BDD sylvan_sharp_xor_addref(BDD a, BDD b);
 		
+		[SuppressUnmanagedCodeSecurity]
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME,EntryPoint="sylvan_sharp_ite_addref")]
 		public static extern BDD sylvan_sharp_ite_addref(BDD a, BDD b, BDD c);
 		
+		[SuppressUnmanagedCodeSecurity]
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME,EntryPoint="sylvan_sharp_diff_addref")]
 		public static extern BDD sylvan_sharp_diff_addref(BDD a, BDD b);
 		
+		[SuppressUnmanagedCodeSecurity]
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME,EntryPoint="sylvan_sharp_less_addref")]
 		public static extern BDD sylvan_sharp_less_addref(BDD a, BDD b);
 		
+		[SuppressUnmanagedCodeSecurity]
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME,EntryPoint="sylvan_sharp_exists_addref")]
 		public static extern BDD sylvan_sharp_exists_addref(BDD a, BDD b);
 		
+		[SuppressUnmanagedCodeSecurity]
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME,EntryPoint="sylvan_sharp_constrain_addref")]
 		public static extern BDD sylvan_sharp_constrain_addref(BDD a, BDD b);
 		
+		[SuppressUnmanagedCodeSecurity]
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME,EntryPoint="sylvan_sharp_restrict_addref")]
 		public static extern BDD sylvan_sharp_restrict_addref(BDD a, BDD b);
 		
+		[SuppressUnmanagedCodeSecurity]
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME,EntryPoint="sylvan_sharp_imp_addref")]
 		public static extern BDD sylvan_sharp_imp_addref(BDD a, BDD b);
 		
+		[SuppressUnmanagedCodeSecurity]
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME,EntryPoint="sylvan_sharp_invimp_addref")]
 		public static extern BDD sylvan_sharp_invimp_addref(BDD a, BDD b);
 		
+		[SuppressUnmanagedCodeSecurity]
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME,EntryPoint="sylvan_sharp_biimp_addref")]
 		public static extern BDD sylvan_sharp_biimp_addref(BDD a, BDD b);
 		
+		[SuppressUnmanagedCodeSecurity]
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME,EntryPoint="sylvan_sharp_support_addref")]
 		public static extern BDD sylvan_sharp_support_addref(BDD bdd);
 		
+		[SuppressUnmanagedCodeSecurity]
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME,EntryPoint="sylvan_sharp_var_bdd_addref")]
 		public static extern BDD sylvan_sharp_var_bdd_addref(BDD bdd);
 		
+		[SuppressUnmanagedCodeSecurity]
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME,EntryPoint="sylvan_sharp_high_addref")]
 		public static extern BDD sylvan_sharp_high_addref(BDD bdd);
 		
+		[SuppressUnmanagedCodeSecurity]
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME,EntryPoint="sylvan_sharp_low_addref")]
 		public static extern BDD sylvan_sharp_low_addref(BDD bdd);
 
+		[SuppressUnmanagedCodeSecurity]
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_delref_if_running")]
 		public static extern void delref_if_running(BDD bdd);
 	}
