@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using BDD = System.Int64;
 
 namespace SylvanSharp
@@ -8,6 +9,9 @@ namespace SylvanSharp
 	{
 		public static readonly bdd bddtrue = new bdd(SylvanSharp.make_true(), false);
 		public static readonly bdd bddfalse = new bdd(SylvanSharp.make_false(), false);
+		
+		public static Stopwatch watch = new Stopwatch();
+		public static int invocations = 0;
 		
 		private BDD _id;
 		
@@ -31,22 +35,38 @@ namespace SylvanSharp
 				
 		public bdd And(bdd r)
 		{
-			return new bdd(SylvanSharp.sylvan_sharp_and_addref(this._id, r._id), false);
+			invocations++;
+			watch.Start();
+			var ret = new bdd(SylvanSharp.sylvan_sharp_and_addref(this._id, r._id), false);
+			watch.Stop();
+			return ret;
 		}
 
 		public bdd Xor(bdd r)
 		{
-			return new bdd(SylvanSharp.sylvan_sharp_xor_addref(this._id, r._id), false);
+			invocations++;
+			watch.Start();
+			var ret = new bdd(SylvanSharp.sylvan_sharp_xor_addref(this._id, r._id), false);
+			watch.Stop();
+			return ret;
 		}
 
 		public bdd Or(bdd r)
-		{
-			return new bdd(SylvanSharp.sylvan_sharp_or_addref(this._id, r._id), false);
+		{			
+			invocations++;
+			watch.Start();
+			var ret = new bdd(SylvanSharp.sylvan_sharp_or_addref(this._id, r._id), false);			
+			watch.Stop();
+			return ret;
 		}
 
 		public bdd Not()
 		{
-			return new bdd(SylvanSharp.sylvan_sharp_not_addref(this._id), false);
+			invocations++;
+			watch.Start();
+			var ret = new bdd(SylvanSharp.sylvan_sharp_not_addref(this._id), false);
+			watch.Stop();
+			return ret;
 		}
 
 		public bdd Imp(bdd r)

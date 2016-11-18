@@ -200,5 +200,9 @@ namespace SylvanSharp
 		[SuppressUnmanagedCodeSecurity]
 		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_serialize_fromfile")]
 		public static extern void sylvan_serialize_fromfile(string i);
+		
+		[SuppressUnmanagedCodeSecurity]
+		[global::System.Runtime.InteropServices.DllImport(DLLNAME, EntryPoint="sylvan_sharp_stats_report")]
+		public static extern void sylvan_stats_report(string filename);
 	}
 }

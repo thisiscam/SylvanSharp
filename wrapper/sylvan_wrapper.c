@@ -284,6 +284,14 @@ sylvan_sharp_fprint_dot(const char* filename, BDD bdd)
     fclose(f);
 }
 
+void
+sylvan_sharp_stats_report(const char* filename)
+{
+    FILE *f = fopen(filename, "w");
+    sylvan_stats_report(f);
+    fclose(f);
+}
+
 // BDD
 // sylvan_sharp_make_uion_piar(jlongArray arr)
 // {
