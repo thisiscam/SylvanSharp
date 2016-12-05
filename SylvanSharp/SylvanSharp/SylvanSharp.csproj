@@ -66,7 +66,7 @@
     <Compile Include="Lace.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\build\wrapper\libsylvan_native.*">
+    <None Include="..\..\build\wrapper\libsylvan_native.*"  Condition="'$(OS)' != 'Windows_NT'">
       <Link>libsylvan_native.so</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
